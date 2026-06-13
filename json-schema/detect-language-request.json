@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yandex-translate/main/json-schema/detect-language-request.json",
+  "title": "DetectLanguageRequest",
+  "description": "Request body for the Yandex Translate API language detection endpoint",
+  "type": "object",
+  "required": ["text"],
+  "properties": {
+    "text": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "The text to detect the language for.",
+      "example": "Bonjour le monde"
+    },
+    "languageCodeHints": {
+      "type": "array",
+      "description": "List of most likely languages, given preference during detection. Uses ISO 639-1 format.",
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "maxLength": 3
+      },
+      "example": ["fr", "en"]
+    },
+    "folderId": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "ID of the folder to which you have access. Required for user account authorization."
+    }
+  }
+}

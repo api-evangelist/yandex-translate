@@ -1,0 +1,24 @@
+{
+  "sourceLanguageCode": "en",
+  "targetLanguageCode": "ru",
+  "texts": [
+    "The API key is required for authentication."
+  ],
+  "folderId": "b1gd3hm2nj34ibndf3sd",
+  "glossaryConfig": {
+    "glossaryData": {
+      "glossaryPairs": [
+        {
+          "sourceText": "API key",
+          "translatedText": "ключ API",
+          "exact": true
+        },
+        {
+          "sourceText": "authentication",
+          "translatedText": "аутентификация",
+          "exact": false
+        }
+      ]
+    }
+  }
+}

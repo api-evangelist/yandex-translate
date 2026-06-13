@@ -1,0 +1,89 @@
+title: Yandex Translate API Vocabulary
+description: Key terms and concepts used in the Yandex Translate API
+url: https://yandex.cloud/en/docs/translate/
+terms:
+  - term: Translation
+    definition: >-
+      The process of converting text from one language (source) to another (target)
+      using Yandex neural machine translation models.
+    url: https://yandex.cloud/en/docs/translate/api-ref/Translation/
+
+  - term: Language Code
+    definition: >-
+      A short string identifier for a language, typically in ISO 639-1 format
+      (e.g., 'en' for English, 'ru' for Russian, 'fr' for French). Used in both
+      source and target language parameters.
+    url: https://en.wikipedia.org/wiki/ISO_639-1
+
+  - term: Language Detection
+    definition: >-
+      Automatic identification of the language in which a given text is written.
+      The Yandex Translate API can detect the language from text samples up to
+      1000 characters.
+
+  - term: Glossary
+    definition: >-
+      A user-defined list of term pairs (source text to translated text) that
+      guides the translation engine to use specific terminology. Useful for
+      domain-specific vocabulary, product names, or brand terms.
+    url: https://yandex.cloud/en/docs/translate/concepts/glossary
+
+  - term: Neuroglossary
+    definition: >-
+      An advanced glossary feature that enables exact matching of source terms
+      and their word forms during neural machine translation, ensuring consistent
+      use of specific terminology.
+    url: https://yandex.cloud/en/docs/translate/concepts/glossary#word-forms
+
+  - term: Source Language
+    definition: >-
+      The language of the original text to be translated. If not specified,
+      the API will automatically detect the source language.
+
+  - term: Target Language
+    definition: >-
+      The language into which the source text should be translated. Must be
+      specified in all translation requests.
+
+  - term: Format
+    definition: >-
+      The markup format of the text to be translated. Supports PLAIN_TEXT
+      (default) and HTML. When using HTML format, the API preserves HTML tags
+      and only translates the text content.
+
+  - term: Folder ID
+    definition: >-
+      The unique identifier for a Yandex Cloud folder (project container).
+      Required for authorization with user accounts (IAM tokens). Not needed
+      when authenticating with service account API keys.
+    url: https://yandex.cloud/en/docs/resource-manager/operations/folder/get-id
+
+  - term: IAM Token
+    definition: >-
+      An Identity and Access Management token from Yandex Cloud used for
+      authenticating API requests. Passed in the Authorization header as
+      'Bearer <IAM_TOKEN>'. Tokens have a limited lifetime.
+    url: https://yandex.cloud/en/docs/iam/concepts/authorization/iam-token
+
+  - term: API Key
+    definition: >-
+      A long-lived authentication credential associated with a Yandex Cloud
+      service account. Passed in the Authorization header as 'Api-Key <KEY>'.
+      Unlike IAM tokens, API keys do not expire.
+    url: https://yandex.cloud/en/docs/iam/concepts/authorization/api-key
+
+  - term: Neural Machine Translation (NMT)
+    definition: >-
+      The machine learning approach used by Yandex Translate that leverages
+      neural networks to produce more natural and contextually accurate
+      translations compared to rule-based systems.
+
+  - term: Speller
+    definition: >-
+      An optional spell-checking feature that corrects spelling errors in the
+      source text before translation, improving the quality of the output.
+
+  - term: GlossaryPair
+    definition: >-
+      A single entry in a glossary consisting of a source text string and its
+      corresponding translated text string. Glossaries can contain 1 to 50 pairs.

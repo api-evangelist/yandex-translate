@@ -1,0 +1,12 @@
+{
+  "translations": [
+    {
+      "text": "Hello, world!",
+      "detectedLanguageCode": "ru"
+    },
+    {
+      "text": "How are you?",
+      "detectedLanguageCode": "ru"
+    }
+  ]
+}

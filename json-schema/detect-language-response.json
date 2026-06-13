@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yandex-translate/main/json-schema/detect-language-response.json",
+  "title": "DetectLanguageResponse",
+  "description": "Response from the Yandex Translate API language detection endpoint",
+  "type": "object",
+  "properties": {
+    "languageCode": {
+      "type": "string",
+      "description": "The detected language code in ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name.",
+      "example": "fr"
+    }
+  }
+}

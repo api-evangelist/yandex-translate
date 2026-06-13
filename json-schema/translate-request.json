@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/yandex-translate/main/json-schema/translate-request.json",
+  "title": "TranslateRequest",
+  "description": "Request body for the Yandex Translate API translate endpoint",
+  "type": "object",
+  "required": ["targetLanguageCode", "texts"],
+  "properties": {
+    "sourceLanguageCode": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "The language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru'). Required when using a glossary.",
+      "example": "ru"
+    },
+    "targetLanguageCode": {
+      "type": "string",
+      "maxLength": 3,
+      "description": "The target language code to translate the text into. Most languages use ISO 639-1 format (e.g., 'en').",
+      "example": "en"
+    },
+    "format": {
+      "type": "string",
+      "description": "Format of the text to be translated.",
+      "enum": ["FORMAT_UNSPECIFIED", "PLAIN_TEXT", "HTML"],
+      "default": "PLAIN_TEXT"
+    },
+    "texts": {
+      "type": "array",
+      "description": "Array of strings to translate. The maximum total length of all strings is 10000 characters.",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "folderId": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "ID of the folder to which you have access. Required for user account authorization."
+    },
+    "model": {
+      "type": "string",
+      "maxLength": 50,
+      "description": "Model ID if using a custom translation model."
+    },
+    "glossaryConfig": {
+      "$ref": "#/definitions/TranslateGlossaryConfig"
+    },
+    "speller": {
+      "type": "boolean",
+      "description": "Enable spell checking for the source text.",
+      "default": false
+    }
+  },
+  "definitions": {
+    "TranslateGlossaryConfig": {
+      "type": "object",
+      "description": "Configuration for applying a glossary during translation",
+      "properties": {
+        "glossaryData": {
+          "$ref": "#/definitions/GlossaryData"
+        }
+      }
+    },
+    "GlossaryData": {
+      "type": "object",
+      "description": "Inline glossary data with source-to-translation text pairs",
+      "properties": {
+        "glossaryPairs": {
+          "type": "array",
+          "description": "Array of text pairs. Max 50 pairs. Total source text ≤10000 chars, total translated text ≤10000 chars.",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/definitions/GlossaryPair"
+          }
+        }
+      }
+    },
+    "GlossaryPair": {
+      "type": "object",
+      "required": ["sourceText", "translatedText"],
+      "description": "A source-to-translation term pair for use in a glossary",
+      "properties": {
+        "sourceText": {
+          "type": "string",
+          "description": "Text in the source language."
+        },
+        "translatedText": {
+          "type": "string",
+          "description": "Text in the target language."
+        },
+        "exact": {
+          "type": "boolean",
+          "description": "Enables exact matching for neuroglossary term forms.",
+          "default": false
+        }
+      }
+    }
+  }
+}

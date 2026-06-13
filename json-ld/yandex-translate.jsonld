@@ -1,0 +1,88 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "schema": "https://schema.org/",
+    "apis": "https://apis.io/vocab/",
+    "openapi": "https://openapi.org/vocab/"
+  },
+  "@type": "WebAPI",
+  "@id": "https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/apis.yml",
+  "name": "Yandex Translate API",
+  "description": "Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages using neural machine translation technology.",
+  "url": "https://yandex.cloud/en/services/translate",
+  "documentation": "https://yandex.cloud/en/docs/translate/",
+  "termsOfService": "https://yandex.cloud/en/legal/cloud_termsofuse/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Yandex Cloud",
+    "url": "https://yandex.cloud/",
+    "sameAs": [
+      "https://twitter.com/yandexcloud",
+      "https://www.linkedin.com/company/yandex-cloud",
+      "https://github.com/yandex-cloud"
+    ]
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://yandex.cloud/en/docs/translate/pricing",
+    "description": "Pay-per-use pricing based on the number of characters translated"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceUrl": "https://translate.api.cloud.yandex.net",
+    "name": "REST API v2"
+  },
+  "potentialAction": [
+    {
+      "@type": "Action",
+      "name": "Translate Text",
+      "description": "Translates an array of text strings from one language to another using neural machine translation",
+      "target": "https://translate.api.cloud.yandex.net/translate/v2/translate"
+    },
+    {
+      "@type": "Action",
+      "name": "Detect Language",
+      "description": "Automatically detects the language of a given text string",
+      "target": "https://translate.api.cloud.yandex.net/translate/v2/detect"
+    },
+    {
+      "@type": "Action",
+      "name": "List Languages",
+      "description": "Returns the list of all languages supported by the Yandex Translate API",
+      "target": "https://translate.api.cloud.yandex.net/translate/v2/languages"
+    }
+  ],
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Machine Translation",
+      "sameAs": "https://en.wikipedia.org/wiki/Machine_translation"
+    },
+    {
+      "@type": "Thing",
+      "name": "Natural Language Processing",
+      "sameAs": "https://en.wikipedia.org/wiki/Natural_language_processing"
+    },
+    {
+      "@type": "Thing",
+      "name": "Neural Machine Translation",
+      "sameAs": "https://en.wikipedia.org/wiki/Neural_machine_translation"
+    }
+  ],
+  "inLanguage": "en",
+  "keywords": [
+    "machine translation",
+    "natural language processing",
+    "language detection",
+    "multilingual",
+    "translation API",
+    "Yandex Cloud",
+    "localization",
+    "internationalization",
+    "glossary",
+    "neural machine translation"
+  ],
+  "license": "https://yandex.cloud/en/legal/cloud_termsofuse/",
+  "version": "v2",
+  "sameAs": "https://yandex.cloud/en/docs/translate/"
+}
