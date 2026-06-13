@@ -1,0 +1,64 @@
+aid: yandex-translate
+name: Yandex Translate API
+description: >-
+  Yandex Translate is a machine translation REST API from Yandex that supports 100+ languages. It
+  provides text translation between any supported language pair, automatic source language detection,
+  and a translation dictionary with synonyms, translations, and examples. The API is part of the
+  Yandex Cloud platform and uses neural machine translation to deliver high-quality translations
+  for developers integrating multilingual capabilities into applications, websites, and services.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Machine Translation
+  - Natural Language Processing
+  - Language Detection
+  - Translation Dictionary
+  - Multilingual
+  - Yandex Cloud
+  - Localization
+  - Internationalization
+apis:
+  - name: Yandex Translate API
+    description: >-
+      REST API for translating text between 100+ languages, detecting the source language of text,
+      and listing supported languages. Built on Yandex neural machine translation technology
+      with support for glossaries to improve translation accuracy for domain-specific vocabulary.
+    humanURL: https://yandex.cloud/en/docs/translate/
+    baseURL: https://translate.api.cloud.yandex.net
+    properties:
+      - type: Documentation
+        url: https://yandex.cloud/en/docs/translate/api-ref/
+      - type: GettingStarted
+        url: https://yandex.cloud/en/docs/translate/quickstart
+      - type: Authentication
+        url: https://yandex.cloud/en/docs/translate/api-ref/authentication
+common:
+  - type: Website
+    url: https://yandex.cloud/en/services/translate
+  - type: Documentation
+    url: https://yandex.cloud/en/docs/translate/
+  - type: GitHubOrg
+    url: https://github.com/yandex-cloud
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/yandex-cloud
+  - type: Blog
+    url: https://yandex.cloud/en/blog
+  - type: Pricing
+    url: https://yandex.cloud/en/docs/translate/pricing
+  - type: StatusPage
+    url: https://status.yandex.cloud/
+  - type: X
+    url: https://twitter.com/yandexcloud
+  - type: Plans
+    url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/plans/yandex-translate-plans-pricing.yml
+  - type: RateLimits
+    url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/rate-limits/yandex-translate-rate-limits.yml
+  - type: FinOps
+    url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/finops/yandex-translate-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

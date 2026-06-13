@@ -1,0 +1,116 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Yandex Translate API
+providerId: yandex-translate
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Machine Translation
+  - Natural Language Processing
+  - Language Detection
+  - Translation Dictionary
+  - Multilingual
+  - Yandex Cloud
+  - Rate Limiting
+  - Quotas
+  - Throttling
+description: >-
+  Machine-readable rate limit definitions for the Yandex Translate API surface. Captures
+  per-tier quotas, per-request character limits, and response signaling. The API enforces both
+  hard technical limits (cannot be changed) and soft quotas (adjustable by support request).
+  See https://yandex.cloud/en/docs/translate/concepts/limits for current published limits.
+headers:
+  limit: X-RateLimit-Limit
+  remaining: X-RateLimit-Remaining
+  reset: X-RateLimit-Reset
+  retryAfter: Retry-After
+  policy: RateLimit-Policy
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+  serviceUnavailable: 503
+limits:
+  - tier: payg
+    name: Translate Requests Per Second
+    scope: folder
+    metric: requests_per_second
+    limit: 100
+    burst: 200
+    timeFrame: second
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Characters Per Request (Translate)
+    scope: request
+    metric: characters_per_request
+    limit: 10000
+    timeFrame: request
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Texts Per Translate Request
+    scope: request
+    metric: items_per_request
+    limit: 100
+    timeFrame: request
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Detect Language Requests Per Second
+    scope: folder
+    metric: requests_per_second
+    limit: 100
+    burst: 200
+    timeFrame: second
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Characters Per Language Detection Request
+    scope: request
+    metric: characters_per_request
+    limit: 1000
+    timeFrame: request
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Glossary Pairs Per Request
+    scope: request
+    metric: items_per_request
+    limit: 50
+    timeFrame: request
+    applies:
+      - Yandex Translate API
+  - tier: payg
+    name: Glossary Total Characters
+    scope: request
+    metric: characters_per_request
+    limit: 20000
+    timeFrame: request
+    applies:
+      - Yandex Translate API
+  - tier: enterprise
+    name: Enterprise Negotiated Rate
+    scope: contract
+    metric: requests_per_second
+    limit: 1000
+    burst: 5000
+    timeFrame: second
+    applies:
+      - Yandex Translate API
+policies:
+  - name: Backoff Strategy
+    description: Clients should implement exponential backoff with jitter, honoring the Retry-After
+      header when present on 429 responses.
+  - name: Quota Types
+    description: Quotas are soft limits adjustable via Yandex Cloud technical support request.
+      Hard limits are technical restrictions of the architecture and cannot be changed.
+  - name: Quota Reset
+    description: Monthly character quotas reset at the start of each calendar month. Per-second
+      rate limits operate on a sliding window basis.
+  - name: Fair Use
+    description: Sustained usage that materially impacts shared infrastructure may be subject
+      to additional fair-use throttling even within quota.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

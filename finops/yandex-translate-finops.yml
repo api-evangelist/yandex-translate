@@ -1,0 +1,134 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+provider: Yandex Translate API
+providerId: yandex-translate
+publisherName: Yandex Cloud
+serviceCategory: API
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Machine Translation
+  - Natural Language Processing
+  - Language Detection
+  - Yandex Cloud
+  - FinOps
+  - Cost Management
+  - FOCUS
+description: >-
+  FinOps framework definition for the Yandex Translate API surface. Provides a FOCUS-aligned
+  mapping for cost allocation, usage measurement, and unit-economics reporting. Yandex Translate
+  uses a pure consumption model billed per million characters translated or detected per month.
+  Cost visibility and allocation are managed through Yandex Cloud's billing console and folder
+  resource hierarchy.
+principles:
+  - name: Visibility
+    description: Make API consumption costs visible to engineering, product, and finance teams
+      in near real-time through Yandex Cloud billing dashboards.
+  - name: Allocation
+    description: Tag every chargeable API call with the consuming Yandex Cloud folder, team,
+      environment, and application so cost can be allocated accurately.
+  - name: Optimization
+    description: Continuously evaluate translation request patterns, text batching, glossary
+      usage, and language detection caching to reduce cost per useful translated unit.
+  - name: Accountability
+    description: Establish budget owners and chargeback or showback flows for each team
+      consuming the translation API within the Yandex Cloud organization.
+domains:
+  - name: Understand Usage and Cost
+    capabilities:
+      - Data Ingestion
+      - Allocation
+      - Reporting and Analytics
+      - Anomaly Management
+  - name: Quantify Business Value
+    capabilities:
+      - Planning and Estimating
+      - Forecasting
+      - Budgeting
+      - Benchmarking
+      - Unit Economics
+  - name: Optimize Usage and Cost
+    capabilities:
+      - Architecting for Cloud
+      - Rate Optimization
+      - Workload Optimization
+      - Cloud Sustainability
+      - Licensing and SaaS
+  - name: Manage the FinOps Practice
+    capabilities:
+      - FinOps Practice Operations
+      - FinOps Education and Enablement
+      - Invoicing and Chargeback
+      - Onboarding Workloads
+      - Intersecting Disciplines
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Tax
+    - Credit
+    - Adjustment
+  chargeFrequency: Recurring
+focusColumns:
+  ServiceName: Yandex Translate
+  ServiceCategory: AI / Machine Translation
+  ProviderName: Yandex Cloud
+  PublisherName: Yandex Cloud
+  InvoiceIssuerName: Yandex Cloud
+  PricingCategory: Usage-Based
+  PricingUnit: million characters
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: translation_characters
+    description: Millions of characters sent for text translation
+    unit: million characters
+    aggregation: sum
+    dimensions:
+      - folder
+      - source_language
+      - target_language
+      - consumer
+  - name: detection_characters
+    description: Millions of characters sent for language detection
+    unit: million characters
+    aggregation: sum
+    dimensions:
+      - folder
+      - consumer
+  - name: api_requests
+    description: Count of billable API requests (translate + detect)
+    unit: request
+    aggregation: sum
+    dimensions:
+      - api
+      - endpoint
+      - folder
+      - consumer
+apis:
+  - name: Yandex Translate API
+    baseURL: https://translate.api.cloud.yandex.net
+    tags: []
+    serviceName: Yandex Translate
+    serviceCategory: AI / Machine Translation
+unitEconomics:
+  - name: Cost per Million Characters Translated
+    metric: billed_cost / (translation_characters)
+    target: TBD
+  - name: Cost per Active Consumer
+    metric: billed_cost / active_consumers
+    target: TBD
+  - name: Cost per 1K Translation Requests
+    metric: billed_cost / (api_requests / 1000)
+    target: TBD
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

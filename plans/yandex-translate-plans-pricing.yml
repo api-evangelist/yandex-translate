@@ -1,0 +1,105 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Yandex Translate API
+providerId: yandex-translate
+created: '2026-06-13'
+modified: '2026-06-13'
+tags:
+  - Machine Translation
+  - Natural Language Processing
+  - Language Detection
+  - Translation Dictionary
+  - Multilingual
+  - Yandex Cloud
+  - Localization
+  - Internationalization
+description: >-
+  Machine-readable plans and pricing for the Yandex Translate API. Pricing is usage-based,
+  charged per million characters translated or detected within a calendar month. There is no
+  free tier; all usage is billed at the published per-character rate. Verify current rates at
+  https://yandex.cloud/en/docs/translate/pricing.
+plans:
+  - id: yandex-translate-payg
+    name: Pay As You Go
+    type: metered
+    description: >-
+      Usage-based billing for Yandex Translate API. Charged per million characters sent for
+      translation or language detection within a calendar month. No minimum commitment or
+      free tier; costs scale directly with usage volume.
+    entries:
+      - label: Text Translation
+        description: Characters sent for translation, billed per million characters per month
+        name: translation_characters
+        type: metered
+        metric: characters
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://translate.api.cloud.yandex.net
+        unit: 1000000
+        price: '3.93'
+        userMultiplied: false
+      - label: Language Detection
+        description: Characters sent for language detection, billed per million characters per month
+        name: detection_characters
+        type: metered
+        metric: characters
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://translate.api.cloud.yandex.net
+        unit: 1000000
+        price: '3.93'
+        userMultiplied: false
+      - label: Max Characters per Request
+        description: Maximum characters allowed per single translation request
+        name: max_chars_per_request
+        type: limit
+        metric: characters
+        limit: 10000
+        timeFrame: request
+        geo: global
+        domains:
+          - https://translate.api.cloud.yandex.net
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Text Translation (100+ languages)
+      - name: Automatic Language Detection
+      - name: Translation Dictionary
+      - name: Glossary Support
+      - name: Yandex Cloud Console Access
+  - id: yandex-translate-enterprise
+    name: Enterprise
+    type: enterprise
+    description: >-
+      Custom-negotiated tier for Yandex Translate API with higher quotas, dedicated capacity,
+      SLA commitments, and volume discounts. Contact Yandex Cloud sales for pricing.
+    entries:
+      - label: Translation Characters
+        description: Negotiated character volume; -1 indicates uncapped subject to contract terms
+        name: translation_characters
+        type: quota
+        metric: characters
+        limit: -1
+        timeFrame: month
+        geo: configurable
+        domains:
+          - https://translate.api.cloud.yandex.net
+        unit: 1000000
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: All Translation Endpoints
+      - name: Dedicated Support
+      - name: Contractual SLA
+      - name: Volume Discounts
+      - name: Custom Quota Limits
+      - name: Yandex Translate API
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
