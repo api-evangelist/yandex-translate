@@ -6,7 +6,7 @@ description: >-
   and a translation dictionary with synonyms, translations, and examples. The API is part of the
   Yandex Cloud platform and uses neural machine translation to deliver high-quality translations
   for developers integrating multilingual capabilities into applications, websites, and services.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
