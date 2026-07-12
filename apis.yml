@@ -37,6 +37,12 @@ apis:
       - type: Authentication
         url: https://yandex.cloud/en/docs/translate/api-ref/authentication
 common:
+  - type: VulnerabilityDisclosure
+    url: security/yandex-translate-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/yandex-translate-domain-security.yml
+  - type: Authentication
+    url: authentication/yandex-translate-authentication.yml
   - type: Website
     url: https://yandex.cloud/en/services/translate
   - type: Documentation
