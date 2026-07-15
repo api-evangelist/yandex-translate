@@ -37,6 +37,8 @@ apis:
       - type: Authentication
         url: https://yandex.cloud/en/docs/translate/api-ref/authentication
 common:
+  - type: AgenticAccess
+    url: agentic-access/yandex-translate-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/yandex-translate-vulnerability-disclosure.yml
   - type: DomainSecurity
