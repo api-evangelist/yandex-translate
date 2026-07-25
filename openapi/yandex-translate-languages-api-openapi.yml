@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Yandex Translate Language Detection Languages API
+  description: Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages. The API uses neural machine translation technology and supports glossaries for domain-specific vocabulary.
+  version: v2
+  contact:
+    url: https://yandex.cloud/en/docs/translate/
+  license:
+    name: Yandex Cloud Terms of Service
+    url: https://yandex.cloud/en/legal/cloud_termsofuse/
+servers:
+- url: https://translate.api.cloud.yandex.net
+  description: Yandex Cloud Translate API endpoint
+security:
+- BearerAuth: []
+- ApiKeyAuth: []
+tags:
+- name: Languages
+  description: Operations for listing supported languages
+paths:
+  /translate/v2/languages:
+    post:
+      operationId: listLanguages
+      summary: List supported languages
+      description: Retrieves the list of languages supported by the Yandex Translate API. Returns language codes and names.
+      tags:
+      - Languages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLanguagesRequest'
+            example:
+              folderId: b1gd3hm2nj34ibndf3sd
+      responses:
+        '200':
+          description: Successful list of supported languages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLanguagesResponse'
+              example:
+                languages:
+                - code: ru
+                  name: Russian
+                - code: en
+                  name: English
+                - code: fr
+                  name: French
+                - code: de
+                  name: German
+        '401':
+          description: Unauthorized - missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ListLanguagesRequest:
+      type: object
+      description: Request body for listing supported languages
+      properties:
+        folderId:
+          type: string
+          maxLength: 50
+          description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: array
+          description: Additional error details.
+          items:
+            type: object
+    ListLanguagesResponse:
+      type: object
+      description: Response containing the list of supported languages
+      properties:
+        languages:
+          type: array
+          description: List of languages supported by the Translate API.
+          items:
+            $ref: '#/components/schemas/Language'
+    Language:
+      type: object
+      description: A supported language entry
+      properties:
+        code:
+          type: string
+          description: The language code, typically in ISO 639-1 format (e.g., 'en', 'ru', 'fr').
+          example: en
+        name:
+          type: string
+          description: The human-readable name of the language (e.g., 'English').
+          example: English
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'IAM token obtained from Yandex Identity and Access Management (IAM). Pass as ''Authorization: Bearer <IAM_TOKEN>''.'
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'API key for service accounts. Pass as ''Authorization: Api-Key <API_KEY>''.'
+externalDocs:
+  description: Yandex Translate API Reference
+  url: https://yandex.cloud/en/docs/translate/api-ref/
