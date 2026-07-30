@@ -6,7 +6,20 @@ description: >-
   and a translation dictionary with synonyms, translations, and examples. The API is part of the
   Yandex Cloud platform and uses neural machine translation to deliver high-quality translations
   for developers integrating multilingual capabilities into applications, websites, and services.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/yandex-translate.png
 url: https://raw.githubusercontent.com/api-evangelist/yandex-translate/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -22,20 +35,50 @@ tags:
   - Localization
   - Internationalization
 apis:
-  - name: Yandex Translate API
-    description: >-
-      REST API for translating text between 100+ languages, detecting the source language of text,
-      and listing supported languages. Built on Yandex neural machine translation technology
-      with support for glossaries to improve translation accuracy for domain-specific vocabulary.
-    humanURL: https://yandex.cloud/en/docs/translate/
-    baseURL: https://translate.api.cloud.yandex.net
-    properties:
-      - type: Documentation
-        url: https://yandex.cloud/en/docs/translate/api-ref/
-      - type: GettingStarted
-        url: https://yandex.cloud/en/docs/translate/quickstart
-      - type: Authentication
-        url: https://yandex.cloud/en/docs/translate/api-ref/authentication
+- name: Yandex Translate API
+  description: >-
+    REST API for translating text between 100+ languages, detecting the source language of text, and listing
+    supported languages. Built on Yandex neural machine translation technology with support for glossaries
+    to improve translation accuracy for domain-specific vocabulary.
+  humanURL: https://yandex.cloud/en/docs/translate/
+  baseURL: https://translate.api.cloud.yandex.net
+  properties:
+  - type: Documentation
+    url: https://yandex.cloud/en/docs/translate/api-ref/
+  - type: GettingStarted
+    url: https://yandex.cloud/en/docs/translate/quickstart
+  - type: Authentication
+    url: https://yandex.cloud/en/docs/translate/api-ref/authentication
+- aid: yandex-translate:yandex-translate-language-detection-api
+  name: Yandex Translate API Language Detection API
+  description: Operations for detecting the language of text
+  humanURL: https://yandex.cloud/en/docs/translate/
+  baseURL: https://translate.api.cloud.yandex.net
+  tags:
+  - Language Detection
+  properties:
+  - type: OpenAPI
+    url: openapi/yandex-translate-language-detection-api-openapi.yml
+- aid: yandex-translate:yandex-translate-languages-api
+  name: Yandex Translate API Languages API
+  description: Operations for listing supported languages
+  humanURL: https://yandex.cloud/en/docs/translate/
+  baseURL: https://translate.api.cloud.yandex.net
+  tags:
+  - Languages
+  properties:
+  - type: OpenAPI
+    url: openapi/yandex-translate-languages-api-openapi.yml
+- aid: yandex-translate:yandex-translate-translation-api
+  name: Yandex Translate API Translation API
+  description: Operations for translating text between languages
+  humanURL: https://yandex.cloud/en/docs/translate/
+  baseURL: https://translate.api.cloud.yandex.net
+  tags:
+  - Translation
+  properties:
+  - type: OpenAPI
+    url: openapi/yandex-translate-translation-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/yandex-translate-agentic-access.yml
