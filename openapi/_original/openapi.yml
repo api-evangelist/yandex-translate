@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  title: Yandex Translate API
+  description: >-
+    Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+
+    languages. It provides text translation between any supported language pair, automatic
+    source language detection, and listing of all supported languages. The API uses neural
+    machine translation technology and supports glossaries for domain-specific vocabulary.
+  version: v2
+  contact:
+    url: https://yandex.cloud/en/docs/translate/
+  license:
+    name: Yandex Cloud Terms of Service
+    url: https://yandex.cloud/en/legal/cloud_termsofuse/
+externalDocs:
+  description: Yandex Translate API Reference
+  url: https://yandex.cloud/en/docs/translate/api-ref/
+servers:
+  - url: https://translate.api.cloud.yandex.net
+    description: Yandex Cloud Translate API endpoint
+security:
+  - BearerAuth: []
+  - ApiKeyAuth: []
+paths:
+  /translate/v2/translate:
+    post:
+      operationId: translate
+      summary: Translate text
+      description: >-
+        Translates the text to the specified language. Supports translating arrays of strings,
+        auto-detection of source language, HTML format, and custom glossaries.
+      tags:
+        - Translation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateRequest'
+            example:
+              targetLanguageCode: en
+              texts:
+                - "Привет, мир!"
+                - "Как дела?"
+              folderId: b1gd3hm2nj34ibndf3sd
+      responses:
+        '200':
+          description: Successful translation response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslateResponse'
+              example:
+                translations:
+                  - text: "Hello, world!"
+                    detectedLanguageCode: ru
+                  - text: "How are you?"
+                    detectedLanguageCode: ru
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many requests - rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /translate/v2/detect:
+    post:
+      operationId: detectLanguage
+      summary: Detect language
+      description: >-
+        Detects the language of the provided text. You can provide language hints to
+        improve detection accuracy.
+      tags:
+        - Language Detection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectLanguageRequest'
+            example:
+              text: "Bonjour le monde"
+              languageCodeHints:
+                - fr
+                - en
+              folderId: b1gd3hm2nj34ibndf3sd
+      responses:
+        '200':
+          description: Successful language detection response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectLanguageResponse'
+              example:
+                languageCode: fr
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /translate/v2/languages:
+    post:
+      operationId: listLanguages
+      summary: List supported languages
+      description: >-
+        Retrieves the list of languages supported by the Yandex Translate API.
+        Returns language codes and names.
+      tags:
+        - Languages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLanguagesRequest'
+            example:
+              folderId: b1gd3hm2nj34ibndf3sd
+      responses:
+        '200':
+          description: Successful list of supported languages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLanguagesResponse'
+              example:
+                languages:
+                  - code: ru
+                    name: Russian
+                  - code: en
+                    name: English
+                  - code: fr
+                    name: French
+                  - code: de
+                    name: German
+        '401':
+          description: Unauthorized - missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        IAM token obtained from Yandex Identity and Access Management (IAM).
+        Pass as 'Authorization: Bearer <IAM_TOKEN>'.
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API key for service accounts. Pass as 'Authorization: Api-Key <API_KEY>'.
+  schemas:
+    TranslateRequest:
+      type: object
+      description: Request body for translating text
+      required:
+        - targetLanguageCode
+        - texts
+      properties:
+        sourceLanguageCode:
+          type: string
+          maxLength: 3
+          description: >-
+            The language code of the source text. Most languages use ISO 639-1 format
+            (e.g., 'ru'). Required when using a glossary.
+          example: ru
+        targetLanguageCode:
+          type: string
+          maxLength: 3
+          description: >-
+            The target language code to translate to. Most languages use ISO 639-1
+            format (e.g., 'en').
+          example: en
+        format:
+          type: string
+          description: Format of the text to be translated.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - PLAIN_TEXT
+            - HTML
+          default: PLAIN_TEXT
+        texts:
+          type: array
+          description: >-
+            Array of strings to translate. The maximum total length of all strings
+            is 10000 characters.
+          minItems: 1
+          items:
+            type: string
+          example:
+            - "Привет, мир!"
+        folderId:
+          type: string
+          maxLength: 50
+          description: >-
+            ID of the folder to which you have access. Required for authorization
+            with a user account. Do not specify if using a service account.
+        model:
+          type: string
+          maxLength: 50
+          description: Model ID if using a custom translation model.
+        glossaryConfig:
+          $ref: '#/components/schemas/TranslateGlossaryConfig'
+        speller:
+          type: boolean
+          description: Enable spell checking for the source text.
+          default: false
+    TranslateGlossaryConfig:
+      type: object
+      description: Configuration for applying a glossary during translation
+      properties:
+        glossaryData:
+          $ref: '#/components/schemas/GlossaryData'
+    GlossaryData:
+      type: object
+      description: Inline glossary data with text pairs
+      properties:
+        glossaryPairs:
+          type: array
+          description: >-
+            Array of text pairs defining source-to-translation mappings.
+            Maximum total length of all source texts is 10000 characters.
+            Maximum total length of all translated texts is 10000 characters.
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/GlossaryPair'
+    GlossaryPair:
+      type: object
+      description: A source-to-translation pair for use in a glossary
+      required:
+        - sourceText
+        - translatedText
+      properties:
+        sourceText:
+          type: string
+          description: Text in the source language.
+        translatedText:
+          type: string
+          description: Text in the target language.
+        exact:
+          type: boolean
+          description: >-
+            Allows adding translations for specific terms to neuroglossaries,
+            enabling exact matching of the source term.
+          default: false
+    TranslateResponse:
+      type: object
+      description: Response containing translated texts
+      properties:
+        translations:
+          type: array
+          description: Array of translated texts in the same order as the input texts.
+          items:
+            $ref: '#/components/schemas/TranslatedText'
+    TranslatedText:
+      type: object
+      description: A single translated text result
+      properties:
+        text:
+          type: string
+          description: The translated text.
+          example: "Hello, world!"
+        detectedLanguageCode:
+          type: string
+          description: >-
+            The detected language code of the source text. Most languages use
+            ISO 639-1 format (e.g., 'ru').
+          example: ru
+    DetectLanguageRequest:
+      type: object
+      description: Request body for detecting the language of text
+      required:
+        - text
+      properties:
+        text:
+          type: string
+          maxLength: 1000
+          description: The text to detect the language for.
+          example: "Bonjour le monde"
+        languageCodeHints:
+          type: array
+          description: >-
+            List of the most likely languages. These languages will be given
+            preference when detecting the text language. Uses ISO 639-1 format.
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 3
+          example:
+            - fr
+            - en
+        folderId:
+          type: string
+          maxLength: 50
+          description: >-
+            ID of the folder to which you have access. Required for user account
+            authorization. Do not specify when using a service account.
+    DetectLanguageResponse:
+      type: object
+      description: Response containing the detected language code
+      properties:
+        languageCode:
+          type: string
+          description: >-
+            Detected language code. Most languages use ISO 639-1 format (e.g., 'fr').
+            Use ListLanguages to get the language name from the code.
+          example: fr
+    ListLanguagesRequest:
+      type: object
+      description: Request body for listing supported languages
+      properties:
+        folderId:
+          type: string
+          maxLength: 50
+          description: >-
+            ID of the folder to which you have access. Required for user account
+            authorization. Do not specify when using a service account.
+    ListLanguagesResponse:
+      type: object
+      description: Response containing the list of supported languages
+      properties:
+        languages:
+          type: array
+          description: List of languages supported by the Translate API.
+          items:
+            $ref: '#/components/schemas/Language'
+    Language:
+      type: object
+      description: A supported language entry
+      properties:
+        code:
+          type: string
+          description: >-
+            The language code, typically in ISO 639-1 format (e.g., 'en', 'ru', 'fr').
+          example: en
+        name:
+          type: string
+          description: The human-readable name of the language (e.g., 'English').
+          example: English
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: array
+          description: Additional error details.
+          items:
+            type: object
+tags:
+  - name: Translation
+    description: Operations for translating text between languages
+  - name: Language Detection
+    description: Operations for detecting the language of text
+  - name: Languages
+    description: Operations for listing supported languages

@@ -1,0 +1,18 @@
+{
+  "provider": "yandex-translate",
+  "sources": [
+    "yandex-translate-language-detection-api-openapi.yml",
+    "yandex-translate-languages-api-openapi.yml",
+    "yandex-translate-translation-api-openapi.yml"
+  ],
+  "outputs": [
+    "yandex-translate-language-detection-api-openapi.yml",
+    "yandex-translate-languages-api-openapi.yml",
+    "yandex-translate-translation-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
