@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yandex Translate Language Detection Languages API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://translate.api.cloud.yandex.net/translate/v2/languages",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the list of languages supported by the Yandex Translate API. Returns language codes and names."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,356 @@
+{
+  "item": [
+    {
+      "id": "7c5e760a-cc17-4617-a43b-2971231209f5",
+      "name": "Translation",
+      "description": {
+        "content": "Operations for translating text between languages",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dcc08dd3-27b6-498b-88b2-6b6d22d82617",
+          "name": "Translate text",
+          "request": {
+            "name": "Translate text",
+            "description": {
+              "content": "Translates the text to the specified language. Supports translating arrays of strings, auto-detection of source language, HTML format, and custom glossaries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "translate",
+                "v2",
+                "translate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetLanguageCode\": \"<string>\",\n  \"texts\": [\n    \"<string>\"\n  ],\n  \"sourceLanguageCode\": \"<string>\",\n  \"format\": \"PLAIN_TEXT\",\n  \"folderId\": \"<string>\",\n  \"model\": \"<string>\",\n  \"glossaryConfig\": {\n    \"glossaryData\": {\n      \"glossaryPairs\": [\n        {\n          \"sourceText\": \"<string>\",\n          \"translatedText\": \"<string>\",\n          \"exact\": false\n        }\n      ]\n    }\n  },\n  \"speller\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0ccb1c34-f96f-4ead-bfce-17f73cd464a7",
+              "name": "Successful translation response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "translate",
+                    "v2",
+                    "translate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLanguageCode\": \"en\",\n  \"texts\": [\n    \"Привет, мир!\",\n    \"Как дела?\"\n  ],\n  \"folderId\": \"b1gd3hm2nj34ibndf3sd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"translations\": [\n    {\n      \"text\": \"Hello, world!\",\n      \"detectedLanguageCode\": \"ru\"\n    },\n    {\n      \"text\": \"How are you?\",\n      \"detectedLanguageCode\": \"ru\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf3af370-9685-485f-b35d-a12e586cc055",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "translate",
+                    "v2",
+                    "translate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLanguageCode\": \"en\",\n  \"texts\": [\n    \"Привет, мир!\",\n    \"Как дела?\"\n  ],\n  \"folderId\": \"b1gd3hm2nj34ibndf3sd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7110,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c63c6c09-176f-4273-a11f-9b73c685d1f2",
+              "name": "Unauthorized - missing or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "translate",
+                    "v2",
+                    "translate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLanguageCode\": \"en\",\n  \"texts\": [\n    \"Привет, мир!\",\n    \"Как дела?\"\n  ],\n  \"folderId\": \"b1gd3hm2nj34ibndf3sd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1394,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd9c39a5-67c2-42fc-8463-0d2de760ebef",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "translate",
+                    "v2",
+                    "translate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLanguageCode\": \"en\",\n  \"texts\": [\n    \"Привет, мир!\",\n    \"Как дела?\"\n  ],\n  \"folderId\": \"b1gd3hm2nj34ibndf3sd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1394,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "791c5e30-0774-4265-919e-b2716d5a4d84",
+              "name": "Too many requests - rate limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "translate",
+                    "v2",
+                    "translate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetLanguageCode\": \"en\",\n  \"texts\": [\n    \"Привет, мир!\",\n    \"Как дела?\"\n  ],\n  \"folderId\": \"b1gd3hm2nj34ibndf3sd\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1394,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://translate.api.cloud.yandex.net",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ac107483-0309-4dfc-95de-e3b805068fd3",
+    "name": "Yandex Translate Language Detection Translation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages. The API uses neural machine translation technology and supports glossaries for domain-specific vocabulary.",
+      "type": "text/plain"
+    }
+  }
+}

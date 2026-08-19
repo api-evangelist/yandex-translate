@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Yandex Translate Language Detection API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Language Detection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Detect language",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://translate.api.cloud.yandex.net/translate/v2/detect",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Detects the language of the provided text. You can provide language hints to improve detection accuracy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
