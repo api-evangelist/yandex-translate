@@ -65,6 +65,8 @@ apis:
   humanURL: https://yandex.cloud/en/docs/translate/
   baseURL: https://translate.api.cloud.yandex.net
   tags:
+  - Language
+  tags_raw:
   - Languages
   properties:
   - type: OpenAPI
