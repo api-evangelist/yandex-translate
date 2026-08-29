@@ -6,6 +6,18 @@ description: >-
   and a translation dictionary with synonyms, translations, and examples. The API is part of the
   Yandex Cloud platform and uses neural machine translation to deliver high-quality translations
   for developers integrating multilingual capabilities into applications, websites, and services.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
