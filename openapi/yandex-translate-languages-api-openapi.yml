@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Yandex Translate Language Detection Languages API
+  title: Yandex Translate Languages API
   description: Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages. The API uses neural machine translation technology and supports glossaries for domain-specific vocabulary.
   version: v2
   contact:
@@ -64,14 +64,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ListLanguagesRequest:
-      type: object
-      description: Request body for listing supported languages
-      properties:
-        folderId:
-          type: string
-          maxLength: 50
-          description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -87,15 +79,6 @@ components:
           description: Additional error details.
           items:
             type: object
-    ListLanguagesResponse:
-      type: object
-      description: Response containing the list of supported languages
-      properties:
-        languages:
-          type: array
-          description: List of languages supported by the Translate API.
-          items:
-            $ref: '#/components/schemas/Language'
     Language:
       type: object
       description: A supported language entry
@@ -108,6 +91,23 @@ components:
           type: string
           description: The human-readable name of the language (e.g., 'English').
           example: English
+    ListLanguagesResponse:
+      type: object
+      description: Response containing the list of supported languages
+      properties:
+        languages:
+          type: array
+          description: List of languages supported by the Translate API.
+          items:
+            $ref: '#/components/schemas/Language'
+    ListLanguagesRequest:
+      type: object
+      description: Request body for listing supported languages
+      properties:
+        folderId:
+          type: string
+          maxLength: 50
+          description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Yandex Translate Language Detection Translation API
+  title: Yandex Translate Translation API
   description: Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages. The API uses neural machine translation technology and supports glossaries for domain-specific vocabulary.
   version: v2
   contact:
@@ -93,6 +93,26 @@ components:
           type: boolean
           description: Allows adding translations for specific terms to neuroglossaries, enabling exact matching of the source term.
           default: false
+    GlossaryData:
+      type: object
+      description: Inline glossary data with text pairs
+      properties:
+        glossaryPairs:
+          type: array
+          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/GlossaryPair'
+    TranslateResponse:
+      type: object
+      description: Response containing translated texts
+      properties:
+        translations:
+          type: array
+          description: Array of translated texts in the same order as the input texts.
+          items:
+            $ref: '#/components/schemas/TranslatedText'
     TranslateRequest:
       type: object
       description: Request body for translating text
@@ -140,17 +160,18 @@ components:
           type: boolean
           description: Enable spell checking for the source text.
           default: false
-    GlossaryData:
+    TranslatedText:
       type: object
-      description: Inline glossary data with text pairs
+      description: A single translated text result
       properties:
-        glossaryPairs:
-          type: array
-          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
-          minItems: 1
-          maxItems: 50
-          items:
-            $ref: '#/components/schemas/GlossaryPair'
+        text:
+          type: string
+          description: The translated text.
+          example: Hello, world!
+        detectedLanguageCode:
+          type: string
+          description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
+          example: ru
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -172,27 +193,6 @@ components:
       properties:
         glossaryData:
           $ref: '#/components/schemas/GlossaryData'
-    TranslatedText:
-      type: object
-      description: A single translated text result
-      properties:
-        text:
-          type: string
-          description: The translated text.
-          example: Hello, world!
-        detectedLanguageCode:
-          type: string
-          description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
-          example: ru
-    TranslateResponse:
-      type: object
-      description: Response containing translated texts
-      properties:
-        translations:
-          type: array
-          description: Array of translated texts in the same order as the input texts.
-          items:
-            $ref: '#/components/schemas/TranslatedText'
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Yandex Translate Language Detection API
   description: Yandex Translate is a machine translation REST API from Yandex Cloud that supports 100+ languages. It provides text translation between any supported language pair, automatic source language detection, and listing of all supported languages. The API uses neural machine translation technology and supports glossaries for domain-specific vocabulary.
@@ -66,14 +66,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    DetectLanguageResponse:
-      type: object
-      description: Response containing the detected language code
-      properties:
-        languageCode:
-          type: string
-          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
-          example: fr
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -114,6 +106,14 @@ components:
           type: string
           maxLength: 50
           description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
+    DetectLanguageResponse:
+      type: object
+      description: Response containing the detected language code
+      properties:
+        languageCode:
+          type: string
+          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
+          example: fr
   securitySchemes:
     BearerAuth:
       type: http
