@@ -81,6 +81,14 @@ components:
           description: Additional error details.
           items:
             type: object
+    DetectLanguageResponse:
+      type: object
+      description: Response containing the detected language code
+      properties:
+        languageCode:
+          type: string
+          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
+          example: fr
     DetectLanguageRequest:
       type: object
       description: Request body for detecting the language of text
@@ -106,14 +114,6 @@ components:
           type: string
           maxLength: 50
           description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
-    DetectLanguageResponse:
-      type: object
-      description: Response containing the detected language code
-      properties:
-        languageCode:
-          type: string
-          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
-          example: fr
   securitySchemes:
     BearerAuth:
       type: http
