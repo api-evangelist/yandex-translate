@@ -66,6 +66,14 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    DetectLanguageResponse:
+      type: object
+      description: Response containing the detected language code
+      properties:
+        languageCode:
+          type: string
+          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
+          example: fr
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -81,14 +89,6 @@ components:
           description: Additional error details.
           items:
             type: object
-    DetectLanguageResponse:
-      type: object
-      description: Response containing the detected language code
-      properties:
-        languageCode:
-          type: string
-          description: Detected language code. Most languages use ISO 639-1 format (e.g., 'fr'). Use ListLanguages to get the language name from the code.
-          example: fr
     DetectLanguageRequest:
       type: object
       description: Request body for detecting the language of text

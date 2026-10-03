@@ -76,15 +76,23 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    TranslateResponse:
+    GlossaryData:
       type: object
-      description: Response containing translated texts
+      description: Inline glossary data with text pairs
       properties:
-        translations:
+        glossaryPairs:
           type: array
-          description: Array of translated texts in the same order as the input texts.
+          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
+          minItems: 1
+          maxItems: 50
           items:
-            $ref: '#/components/schemas/TranslatedText'
+            $ref: '#/components/schemas/GlossaryPair'
+    TranslateGlossaryConfig:
+      type: object
+      description: Configuration for applying a glossary during translation
+      properties:
+        glossaryData:
+          $ref: '#/components/schemas/GlossaryData'
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -100,6 +108,15 @@ components:
           description: Additional error details.
           items:
             type: object
+    TranslateResponse:
+      type: object
+      description: Response containing translated texts
+      properties:
+        translations:
+          type: array
+          description: Array of translated texts in the same order as the input texts.
+          items:
+            $ref: '#/components/schemas/TranslatedText'
     GlossaryPair:
       type: object
       description: A source-to-translation pair for use in a glossary
@@ -176,23 +193,6 @@ components:
           type: string
           description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
           example: ru
-    GlossaryData:
-      type: object
-      description: Inline glossary data with text pairs
-      properties:
-        glossaryPairs:
-          type: array
-          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
-          minItems: 1
-          maxItems: 50
-          items:
-            $ref: '#/components/schemas/GlossaryPair'
-    TranslateGlossaryConfig:
-      type: object
-      description: Configuration for applying a glossary during translation
-      properties:
-        glossaryData:
-          $ref: '#/components/schemas/GlossaryData'
   securitySchemes:
     BearerAuth:
       type: http
