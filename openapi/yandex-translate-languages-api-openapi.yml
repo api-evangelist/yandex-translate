@@ -79,6 +79,23 @@ components:
           description: Additional error details.
           items:
             type: object
+    ListLanguagesResponse:
+      type: object
+      description: Response containing the list of supported languages
+      properties:
+        languages:
+          type: array
+          description: List of languages supported by the Translate API.
+          items:
+            $ref: '#/components/schemas/Language'
+    ListLanguagesRequest:
+      type: object
+      description: Request body for listing supported languages
+      properties:
+        folderId:
+          type: string
+          maxLength: 50
+          description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
     Language:
       type: object
       description: A supported language entry
@@ -91,23 +108,6 @@ components:
           type: string
           description: The human-readable name of the language (e.g., 'English').
           example: English
-    ListLanguagesRequest:
-      type: object
-      description: Request body for listing supported languages
-      properties:
-        folderId:
-          type: string
-          maxLength: 50
-          description: ID of the folder to which you have access. Required for user account authorization. Do not specify when using a service account.
-    ListLanguagesResponse:
-      type: object
-      description: Response containing the list of supported languages
-      properties:
-        languages:
-          type: array
-          description: List of languages supported by the Translate API.
-          items:
-            $ref: '#/components/schemas/Language'
   securitySchemes:
     BearerAuth:
       type: http

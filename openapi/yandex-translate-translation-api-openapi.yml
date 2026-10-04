@@ -87,12 +87,6 @@ components:
           maxItems: 50
           items:
             $ref: '#/components/schemas/GlossaryPair'
-    TranslateGlossaryConfig:
-      type: object
-      description: Configuration for applying a glossary during translation
-      properties:
-        glossaryData:
-          $ref: '#/components/schemas/GlossaryData'
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -108,15 +102,12 @@ components:
           description: Additional error details.
           items:
             type: object
-    TranslateResponse:
+    TranslateGlossaryConfig:
       type: object
-      description: Response containing translated texts
+      description: Configuration for applying a glossary during translation
       properties:
-        translations:
-          type: array
-          description: Array of translated texts in the same order as the input texts.
-          items:
-            $ref: '#/components/schemas/TranslatedText'
+        glossaryData:
+          $ref: '#/components/schemas/GlossaryData'
     GlossaryPair:
       type: object
       description: A source-to-translation pair for use in a glossary
@@ -134,6 +125,27 @@ components:
           type: boolean
           description: Allows adding translations for specific terms to neuroglossaries, enabling exact matching of the source term.
           default: false
+    TranslateResponse:
+      type: object
+      description: Response containing translated texts
+      properties:
+        translations:
+          type: array
+          description: Array of translated texts in the same order as the input texts.
+          items:
+            $ref: '#/components/schemas/TranslatedText'
+    TranslatedText:
+      type: object
+      description: A single translated text result
+      properties:
+        text:
+          type: string
+          description: The translated text.
+          example: Hello, world!
+        detectedLanguageCode:
+          type: string
+          description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
+          example: ru
     TranslateRequest:
       type: object
       description: Request body for translating text
@@ -181,18 +193,6 @@ components:
           type: boolean
           description: Enable spell checking for the source text.
           default: false
-    TranslatedText:
-      type: object
-      description: A single translated text result
-      properties:
-        text:
-          type: string
-          description: The translated text.
-          example: Hello, world!
-        detectedLanguageCode:
-          type: string
-          description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
-          example: ru
   securitySchemes:
     BearerAuth:
       type: http
