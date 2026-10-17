@@ -76,64 +76,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    GlossaryData:
-      type: object
-      description: Inline glossary data with text pairs
-      properties:
-        glossaryPairs:
-          type: array
-          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
-          minItems: 1
-          maxItems: 50
-          items:
-            $ref: '#/components/schemas/GlossaryPair'
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable error message.
-        details:
-          type: array
-          description: Additional error details.
-          items:
-            type: object
-    TranslateGlossaryConfig:
-      type: object
-      description: Configuration for applying a glossary during translation
-      properties:
-        glossaryData:
-          $ref: '#/components/schemas/GlossaryData'
-    GlossaryPair:
-      type: object
-      description: A source-to-translation pair for use in a glossary
-      required:
-      - sourceText
-      - translatedText
-      properties:
-        sourceText:
-          type: string
-          description: Text in the source language.
-        translatedText:
-          type: string
-          description: Text in the target language.
-        exact:
-          type: boolean
-          description: Allows adding translations for specific terms to neuroglossaries, enabling exact matching of the source term.
-          default: false
-    TranslateResponse:
-      type: object
-      description: Response containing translated texts
-      properties:
-        translations:
-          type: array
-          description: Array of translated texts in the same order as the input texts.
-          items:
-            $ref: '#/components/schemas/TranslatedText'
     TranslatedText:
       type: object
       description: A single translated text result
@@ -146,6 +88,26 @@ components:
           type: string
           description: The detected language code of the source text. Most languages use ISO 639-1 format (e.g., 'ru').
           example: ru
+    TranslateResponse:
+      type: object
+      description: Response containing translated texts
+      properties:
+        translations:
+          type: array
+          description: Array of translated texts in the same order as the input texts.
+          items:
+            $ref: '#/components/schemas/TranslatedText'
+    GlossaryData:
+      type: object
+      description: Inline glossary data with text pairs
+      properties:
+        glossaryPairs:
+          type: array
+          description: Array of text pairs defining source-to-translation mappings. Maximum total length of all source texts is 10000 characters. Maximum total length of all translated texts is 10000 characters.
+          minItems: 1
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/GlossaryPair'
     TranslateRequest:
       type: object
       description: Request body for translating text
@@ -193,6 +155,44 @@ components:
           type: boolean
           description: Enable spell checking for the source text.
           default: false
+    GlossaryPair:
+      type: object
+      description: A source-to-translation pair for use in a glossary
+      required:
+      - sourceText
+      - translatedText
+      properties:
+        sourceText:
+          type: string
+          description: Text in the source language.
+        translatedText:
+          type: string
+          description: Text in the target language.
+        exact:
+          type: boolean
+          description: Allows adding translations for specific terms to neuroglossaries, enabling exact matching of the source term.
+          default: false
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        details:
+          type: array
+          description: Additional error details.
+          items:
+            type: object
+    TranslateGlossaryConfig:
+      type: object
+      description: Configuration for applying a glossary during translation
+      properties:
+        glossaryData:
+          $ref: '#/components/schemas/GlossaryData'
   securitySchemes:
     BearerAuth:
       type: http
